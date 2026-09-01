@@ -1,30 +1,45 @@
 const FollowUp = require("../models/FollowUp");
+const Lead = require("../models/Lead");
 
 // CREATE FOLLOW-UP
 const createFollowUp = async (req, res) => {
   try {
     const {
-      lead,
+      leadId,
       date,
       followUpType,
       remarks,
       nextFollowUpDate,
     } = req.body;
 
-    if (!lead || !followUpType) {
+    // Check required fields
+    if (!leadId || !followUpType) {
       return res.status(400).json({
-        message: "Lead and follow-up type are required",
+        message: "Lead ID and follow-up type are required",
       });
     }
 
+    // Check whether lead exists
+    const lead = await Lead.findById(leadId);
+
+    if (!lead) {
+      return res.status(404).json({
+        message: "Lead not found",
+      });
+    }
+
+    // Create follow-up
     const followUp = await FollowUp.create({
-      lead,
       date,
       followUpType,
       remarks,
       nextFollowUpDate,
       createdBy: req.user.userId,
     });
+
+    // Add follow-up ID to the Lead
+    lead.followUps.push(followUp._id);
+    await lead.save();
 
     res.status(201).json({
       message: "Follow-up added successfully",
@@ -39,11 +54,19 @@ const createFollowUp = async (req, res) => {
 };
 
 
-// GET FOLLOW-UP HISTORY
-const getFollowUps = async (req, res) => {
+// GET FOLLOW-UPS USING FOLLOW-UP IDS
+const getFollowUpsByIds = async (req, res) => {
   try {
+    const { ids } = req.body;
+
+    if (!ids || !Array.isArray(ids)) {
+      return res.status(400).json({
+        message: "Please provide an array of follow-up IDs",
+      });
+    }
+
     const followUps = await FollowUp.find({
-      lead: req.params.leadId,
+      _id: { $in: ids },
     })
       .populate("createdBy", "name email")
       .sort({ date: -1 });
@@ -63,5 +86,5 @@ const getFollowUps = async (req, res) => {
 
 module.exports = {
   createFollowUp,
-  getFollowUps,
+  getFollowUpsByIds,
 };

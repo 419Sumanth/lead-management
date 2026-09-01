@@ -2,12 +2,7 @@ const mongoose = require("mongoose");
 
 const followUpSchema = new mongoose.Schema(
   {
-    lead: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Lead",
-      required: true,
-    },
-
+    
     date: {
       type: Date,
       required: true,
@@ -17,13 +12,6 @@ const followUpSchema = new mongoose.Schema(
     followUpType: {
       type: String,
       required: true,
-      enum: [
-        "Call",
-        "Email",
-        "WhatsApp",
-        "Meeting",
-        "Other",
-      ],
     },
 
     remarks: {

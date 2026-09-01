@@ -33,3 +33,5 @@ const userSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("User", userSchema);
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTk2OWNmYjU4NjI4ZDY5MjcxMzFhMTEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODgyNzMyMjksImV4cCI6MTc4ODM1OTYyOX0.4lHCV8rqLlhsv3yV1CyigzckjzO4rtxh_OPntzmsX0k

@@ -82,6 +82,13 @@ const leadSchema = new mongoose.Schema(
       ],
       default: "New",
     },
+
+    followUps: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FollowUp",
+      },
+    ],
   },
   {
     timestamps: true,
