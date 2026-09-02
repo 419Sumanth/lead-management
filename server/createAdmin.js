@@ -41,3 +41,29 @@ const createAdmin = async () => {
 };
 
 createAdmin();
+
+// Email:    admin@company.com
+// Password: Admin@123
+// Role:     admin
+
+// const admin: mongoose.Document<unknown, {}, {
+//  name: string;
+//  email: string;
+//  password: string;
+//  role: "admin" | "salesperson";
+// } & mongoose.DefaultTimestampProps, {
+//  id: string;
+// }, {
+//  timestamps: true;
+// }> & Omit<{
+//  name: string;
+//  email: string;
+//  password: string;
+//  role: "admin" | "salesperson";
+// } & mongoose.DefaultTimestampProps & {
+//  _id: mongoose.Types.ObjectId;
+// } & {
+//  __v: number;
+// }, "id"> & mongoose.HydratedDocumentOverrides<{
+//  id: string;
+// }>
