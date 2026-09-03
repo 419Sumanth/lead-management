@@ -6,6 +6,7 @@ import Leads from "./pages/Leads";
 import AddLead from "./pages/AddLead";
 import LeadDetails from "./pages/LeadDetails";
 import EditLead from "./pages/EditLead";
+import AddFollowUp from "./pages/AddFollowUp";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
@@ -56,6 +57,15 @@ function App() {
         element={
           <ProtectedLayout>
             <LeadDetails />
+          </ProtectedLayout>
+        }
+      />
+
+      <Route
+        path="/leads/:id/followup"
+        element={
+          <ProtectedLayout>
+            <AddFollowUp />
           </ProtectedLayout>
         }
       />

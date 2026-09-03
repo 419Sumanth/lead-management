@@ -207,3 +207,26 @@ module.exports = {
   updateLead,
   deleteLead,
 };
+
+
+// POST
+// http://localhost:5000/api/leads
+// {
+//   "leadName": "Sumanth Bhat",
+//   "companyName": "ABC Technologies",
+//   "mobile": "9876543210",
+//   "email": "sumanth@example.com",
+//   "service": "Website Development",
+//   "leadSource": "Website",
+//   "estimatedValue": 100000,
+//   "assignedTo": "ADMIN_USER_ID",
+//   "status": "New"
+// }
+
+
+// PUT
+// http://localhost:5000/api/leads/LEAD_ID
+// {
+//   "status": "Contacted",
+//   "estimatedValue": 150000
+// }

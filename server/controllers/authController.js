@@ -64,6 +64,24 @@ const login = async (req, res) => {
   }
 };
 
+const getSalespersons = async (req, res) => {
+  try {
+    const users = await User.find({
+      role: "salesperson",
+    }).select("-password");
+
+    res.status(200).json({
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch salespersons",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   login,
+  getSalespersons
 };

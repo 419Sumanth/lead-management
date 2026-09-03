@@ -88,3 +88,15 @@ module.exports = {
   createFollowUp,
   getFollowUpsByIds,
 };
+
+
+
+// POST
+// http://localhost:5000/api/followups
+// {
+//   "leadId": "LEAD_ID",
+//   "date": "2026-09-01",
+//   "followUpType": "Call",
+//   "remarks": "Discussed project requirements",
+//   "nextFollowUpDate": "2026-09-05"
+// }

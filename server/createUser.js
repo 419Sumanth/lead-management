@@ -11,10 +11,10 @@ const createUser = async () => {
 
     console.log("MongoDB connected");
 
-    const name = "Admin Two";
-    const email = "admin2@company.com";
-    const password = "Admin2@123";
-    const role = "admin";
+    const name = "Nahush";
+    const email = "nahush@sales.com";
+    const password = "Nahush@123";
+    const role = "salesperson";
 
     const existingUser = await User.findOne({ email });
 
@@ -48,5 +48,18 @@ const createUser = async () => {
 
 createUser();
 
+//sales 1
 // sales@company.com
 // Sales@123
+
+//sales 2
+//const email = "akash@sales.com";
+//const password = "Akash@123";
+
+//sales 3
+//const email = "gowtam@sales.com";
+//const password = "Gowtam@123";
+
+//sales 4
+//const email = "nahush@sales.com";
+//const password = "Nahush@123";
