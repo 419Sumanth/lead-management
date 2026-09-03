@@ -1,8 +1,9 @@
 
-  import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,42 +49,69 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Lead Management System</h1>
+    <div className="login-page">
+      <div className="login-card">
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
+        <div className="login-header">
+          <div className="login-icon">LM</div>
 
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
-          />
+          <h1>Lead Management</h1>
+
+          <p>
+            Sign in to manage your leads and follow-ups
+          </p>
         </div>
 
-        <div>
-          <label>Password</label>
+        <form onSubmit={handleSubmit} className="login-form">
 
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
-          />
+          <div className="login-form-group">
+            <label>Email</label>
+
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              autoComplete="email"
+            />
+          </div>
+
+          <div className="login-form-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              autoComplete="current-password"
+            />
+          </div>
+
+          {error && (
+            <div className="login-error">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="login-button"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+
+        </form>
+
+        <div className="login-footer">
+          Lead Management System
         </div>
 
-        {error && <p>{error}</p>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-
-
 export default Login;
+

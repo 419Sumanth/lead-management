@@ -50,6 +50,20 @@
   color: white;
 }
 
+.delete-lead-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-lead-btn:hover {
+  background: #b91c1c;
+}
+
 .details-card {
   background: white;
   border: 1px solid #e2e8f0;

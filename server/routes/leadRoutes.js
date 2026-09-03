@@ -1,5 +1,4 @@
 const express = require("express");
-const protect = require("../middleware/authMiddleware");
 
 const {
   createLead,
@@ -9,23 +8,24 @@ const {
   deleteLead,
 } = require("../controllers/leadController");
 
+const protect = require("../middleware/authMiddleware");
+const authorize = require("../middleware/roleMiddleware");
+
 const router = express.Router();
 
-// Create a lead
-router.post("/", createLead);
+router.post("/", protect, createLead);
 
-// Get all leads
-router.get("/", getLeads);
+router.get("/", protect, getLeads);
 
-// Get single lead
-router.get("/:id", getLeadById);
+router.get("/:id", protect, getLeadById);
 
-// Update lead
-router.put("/:id", updateLead);
+router.put("/:id", protect, updateLead);
 
-// Delete lead
-router.delete("/:id", deleteLead);
-
-
+router.delete(
+  "/:id",
+  protect,
+  authorize("admin"),
+  deleteLead
+);
 
 module.exports = router;

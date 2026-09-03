@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import "./LeadDetails.css";
+import { useAuth } from "../context/AuthContext";
 
 const LeadDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [lead, setLead] = useState(null);
   const [followUps, setFollowUps] = useState([]);
@@ -87,6 +90,26 @@ const LeadDetails = () => {
     );
   }
 
+  //Delete function
+  const handleDelete = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this lead?"
+  );
+
+      if (!confirmDelete) return;
+
+      try {
+        await api.delete(`/leads/${id}`);
+
+        navigate("/leads");
+      } catch (error) {
+        alert(
+          error.response?.data?.message ||
+            "Failed to delete lead"
+        );
+      }
+    };
+
   return (
     <div className="lead-details-page">
       {/* Header */}
@@ -103,6 +126,15 @@ const LeadDetails = () => {
           >
             Edit Lead
           </Link>
+
+          {user?.role === "admin" && (
+              <button
+                onClick={handleDelete}
+                className="delete-lead-btn"
+              >
+                Delete Lead
+              </button>
+           )}
 
           <Link
             to="/leads"

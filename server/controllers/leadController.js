@@ -15,6 +15,13 @@ const createLead = async (req, res) => {
       status,
     } = req.body;
 
+    const existingLead = await Lead.findOne({mobile,_id: { $ne: req.params.id },});
+      if (existingLead) {
+        return res.status(409).json({
+          message: "A lead with this mobile number already exists",
+        });
+      }
+
     if (
       !leadName ||
       !companyName ||
@@ -136,8 +143,16 @@ const getLeadById = async (req, res) => {
       });
     }
 
+    if (req.user.role === "salesperson" &&
+        lead.assignedTo.toString() !== req.user.userId) 
+      {
+        return res.status(403).json({
+          message: "You are not authorized to add follow-ups to this lead",
+        });
+      }
+
     res.status(200).json(lead);
-  } catch (error) {
+   } catch (error) {
     res.status(500).json({
       message: "Failed to fetch lead",
       error: error.message,
