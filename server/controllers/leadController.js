@@ -76,6 +76,12 @@ const getLeads = async (req, res) => {
 
     let filter = {};
 
+    console.log("User Role:", req.user.id); // Debugging line to check the user role
+
+    if( req.user.role === "salesperson") {
+      filter.assignedTo = req.user.userId;
+    }
+    
     // Search
     if (search) {
       filter.$or = [
@@ -85,6 +91,7 @@ const getLeads = async (req, res) => {
         { mobile: { $regex: search, $options: "i" } },
       ];
     }
+    console.log("Filter:", filter); // Debugging line to check the filter object
 
     // Filters
     if (status) {
@@ -143,13 +150,13 @@ const getLeadById = async (req, res) => {
       });
     }
 
-    if (req.user.role === "salesperson" &&
-        lead.assignedTo.toString() !== req.user.userId) 
-      {
-        return res.status(403).json({
-          message: "You are not authorized to add follow-ups to this lead",
-        });
-      }
+    // if (req.user.role === "salesperson" &&
+    //     lead.assignedTo.toString() !== req.user.userId) 
+    //   {
+    //     return res.status(403).json({
+    //       message: "You are not authorized to add follow-ups to this lead",
+    //     });
+    //   }
 
     res.status(200).json(lead);
    } catch (error) {

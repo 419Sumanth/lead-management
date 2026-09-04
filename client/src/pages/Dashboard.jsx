@@ -58,16 +58,16 @@ const Dashboard = () => {
         </div>
 
         <div>
-          <h3>Proposal Sent : {stats.proposalSent} </h3>
+          <h3>Proposal Sent : {stats.proposalSentLeads} </h3>
         </div>
 
         <div>
-          <h3>Won : {stats.won} </h3>  
+          <h3>Won : {stats.wonLeads} </h3>  
         </div>
 
-        <div>
-          <h3>Lost : {stats.lost}</h3> 
-        </div>
+        {/* <div>
+          <h3>Lost : {stats.lostLeads}</h3> 
+        </div> */}
 
         <div>
           <h3>Potential Business Value : ₹{stats.potentialBusinessValue} </h3>  

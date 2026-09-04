@@ -13,6 +13,13 @@ const getDashboardStats = async (req, res) => {
       status: "Won",
     });
 
+    const proposalSentLeads = await Lead.countDocuments({
+      status: "Proposal Sent",
+    });
+
+    // console.log("wonLeads Leads:", wonLeads); // Debugging line to check the count of won leads
+    // console.log("totalLeads Leads:", totalLeads); // Debugging line to check the count of total leads
+
     // Follow-ups due today or earlier
     const today = new Date();
     today.setHours(23, 59, 59, 999);
@@ -53,6 +60,7 @@ const getDashboardStats = async (req, res) => {
       newLeads,
       followUpsDue,
       wonLeads,
+      proposalSentLeads,
       potentialBusinessValue: businessValue,
     });
   } catch (error) {
